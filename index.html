@@ -204,12 +204,8 @@
       color: #94a3b8;
     }
 
-    /* Hint Content Reveal Areas */
-    .hint-content-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
+    /* Hint Content Reveal */
+    .hint-content-wrap { display: flex; flex-direction: column; gap: 10px; }
     .clue-ipa-row {
       display: none;
       align-items: center;
@@ -254,7 +250,7 @@
       animation: fadeIn 0.25s ease;
     }
 
-    /* Molecular Scramble Board */
+    /* Scramble Board */
     .scramble-area { margin: 24px 0; text-align: center; }
     .slots-container {
       display: flex;
@@ -286,18 +282,8 @@
       transition: transform 0.15s ease;
     }
     .char-box:hover { transform: translateY(-2px); }
-    .char-box.space {
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      width: 20px;
-      cursor: default;
-    }
-    .char-box.empty {
-      background: #edf2f7;
-      border: 2px dashed #94a3b8;
-      color: transparent;
-    }
+    .char-box.space { background: transparent; border: none; box-shadow: none; width: 20px; cursor: default; }
+    .char-box.empty { background: #edf2f7; border: 2px dashed #94a3b8; color: transparent; }
 
     .pool-container {
       display: flex;
@@ -339,27 +325,11 @@
       animation: fadeIn 0.25s ease;
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-    .feedback-banner.correct {
-      display: flex;
-      background: #ecfdf5;
-      color: #065f46;
-      border: 1.5px solid #a7f3d0;
-    }
-    .feedback-banner.incorrect {
-      display: flex;
-      background: #fef2f2;
-      color: #991b1b;
-      border: 1.5px solid #fecaca;
-    }
+    .feedback-banner.correct { display: flex; background: #ecfdf5; color: #065f46; border: 1.5px solid #a7f3d0; }
+    .feedback-banner.incorrect { display: flex; background: #fef2f2; color: #991b1b; border: 1.5px solid #fecaca; }
 
     /* Actions Grid */
-    .action-bar {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-top: 10px;
-    }
+    .action-bar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px; }
     .action-bar .btn { flex: 1; min-width: 140px; }
 
     /* Modal */
@@ -389,7 +359,6 @@
     .report-table th, .report-table td { padding: 12px 14px; border: 1px solid var(--border); text-align: left; }
     .report-table th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
 
-    /* Responsive */
     @media (max-width: 640px) {
       header { padding: 12px 16px; }
       .teacher-badge img { width: 56px; height: 56px; }
@@ -445,7 +414,6 @@
     <!-- SCREEN 2: GAMEPLAY ARENA -->
     <section id="screen-game" class="screen">
       <div class="card">
-        <!-- Top status bar with metrics & early submit button -->
         <div class="game-top-bar">
           <div class="badge-group">
             <span class="badge badge-progress" id="progressText">Câu: 1 / 10</span>
@@ -457,7 +425,7 @@
           </button>
         </div>
 
-        <!-- Clue / Interactive Hint Card (Default: Hidden contents, only 3 hint buttons) -->
+        <!-- Clue / Interactive Hint Card -->
         <div class="clue-card">
           <div class="hint-buttons-row">
             <button type="button" class="btn-hint-item" id="btnHintIpa">
@@ -556,7 +524,7 @@
 
   <script>
     /* ========================================================
-       1. BỘ DỮ LIỆU CHUẨN 10 THUẬT NGỮ EXCEL (UNIT 2 SH12)
+       1. BỘ DỮ LIỆU 10 THUẬT NGỮ EXCEL (UNIT 2 SH12)
        ======================================================== */
     const VOCABULARY_DATA = [
       {
@@ -645,12 +613,12 @@
        2. CẤU HÌNH HỆ THỐNG
        ======================================================== */
     const CONFIG = {
-      totalTimeSeconds: 240, // 4 phút = 240 giây
-      googleSheetUrl: "https://script.google.com/macros/s/AKfycbxYtBDtOZfyrgZZqWctCFOMCxoRYnHOSlk4KPqpkuowzNPObcTBbQ5nbh7BsqNRuMi30A/exec" // URL Apps Script
+      totalTimeSeconds: 240, // 4 phút
+      googleSheetUrl: "https://script.google.com/macros/s/AKfycbzuT0De1Z-v1oHHrCwvzWoMs2YseNQpaPeHFOJS_hxtOr6A4hHC7CxNue-BZeHcpPWrtA/exec" // Thay link Google Apps Script triển khai tại đây
     };
 
     /* ========================================================
-       3. BỘ PHÁT ÂM THANH AN TOÀN (WEB AUDIO SYNTHESIZER)
+       3. BỘ PHÁT ÂM THANH SYNTHESIZER
        ======================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -699,7 +667,7 @@
     }
 
     /* ========================================================
-       4. QUẢN LÝ LƯỢT XEM TỪ MỐC 95
+       4. LƯỢT XEM TỪ MỐC 95
        ======================================================== */
     function initViewsCounter() {
       const STORAGE_KEY = "molecule_code_views_count";
@@ -718,7 +686,7 @@
     }
 
     /* ========================================================
-       5. QUẢN LÝ TRẠNG THÁI VÀ LOGIC GAME
+       5. QUẢN LÝ TIẾN TRÌNH GAME
        ======================================================== */
     let student = { name: "", className: "" };
     let currentIndex = 0;
@@ -730,7 +698,6 @@
     let userResults = [];
     let isCurrentWordVerified = false;
 
-    // Quản lý trạng thái mở gợi ý trong từng câu
     let hintsUsed = { ipa: false, en: false, vi: false };
 
     function showScreen(screenId) {
@@ -796,16 +763,15 @@
       document.getElementById("progressText").innerText = `Câu: ${index + 1} / ${VOCABULARY_DATA.length}`;
       document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
 
-      // Reset nội dung gợi ý (Mặc định ẩn)
       document.getElementById("clueIpa").innerText = item.ipa;
       document.getElementById("clueDefEn").innerText = item.defEn;
       document.getElementById("clueDefVi").innerText = item.defVi;
 
+      // Ẩn nội dung gợi ý mặc định
       document.getElementById("ipaBox").style.display = "none";
       document.getElementById("clueDefEn").style.display = "none";
       document.getElementById("clueDefVi").style.display = "none";
 
-      // Reset các nút gợi ý
       const btnIpa = document.getElementById("btnHintIpa");
       const btnEn = document.getElementById("btnHintEn");
       const btnVi = document.getElementById("btnHintVi");
@@ -844,7 +810,6 @@
       renderPool();
     }
 
-    /* Các hàm xử lý mở gợi ý có trừ điểm */
     function useHintIpa() {
       if (hintsUsed.ipa || isCurrentWordVerified) return;
       hintsUsed.ipa = true;
@@ -976,7 +941,7 @@
         banner.className = "feedback-banner correct";
         textSpan.innerHTML = `🎉 <strong>CHÍNH XÁC!</strong> Bạn đã giải mã thành công phân tử <u>${currentItem.word}</u>. Bấm "Tiếp theo ➡️" để tiếp tục.`;
 
-        // Tự động mở toàn bộ gợi ý sau khi trả lời đúng để học sinh ôn lại
+        // Tự động mở toàn bộ gợi ý sau khi trả lời đúng
         document.getElementById("ipaBox").style.display = "inline-flex";
         document.getElementById("clueDefEn").style.display = "block";
         document.getElementById("clueDefVi").style.display = "block";
@@ -1016,7 +981,6 @@
       loadQuestion(currentIndex);
     }
 
-    /* Modal Nộp bài sớm */
     function openEarlySubmitModal() {
       const answeredCount = userResults.filter(r => r && r.isCorrect).length;
       document.getElementById("modalConfirmText").innerText = 
@@ -1033,10 +997,11 @@
       closeEarlySubmitModal();
       showScreen("screen-report");
 
-      const timeSpent = CONFIG.totalTimeSeconds - Math.max(0, timeLeft);
-      const mins = Math.floor(timeSpent / 60);
-      const secs = timeSpent % 60;
-      const formattedTime = `${mins} phút ${secs} giây`;
+      // Tính chính xác số phút và giây thực tế học sinh đã làm
+      const elapsedSeconds = CONFIG.totalTimeSeconds - Math.max(0, timeLeft);
+      const mins = Math.floor(elapsedSeconds / 60);
+      const secs = elapsedSeconds % 60;
+      const formattedTime = `${mins.toString().padStart(2, '0')} phút ${secs.toString().padStart(2, '0')} giây`;
 
       document.getElementById("repName").innerText = student.name;
       document.getElementById("repClass").innerText = student.className;
@@ -1060,6 +1025,7 @@
         tbody.appendChild(tr);
       });
 
+      // Gửi đồng bộ chính xác 5 trường dữ liệu về Google Sheets
       sendToGoogleSheet({
         timestamp: new Date().toLocaleString("vi-VN"),
         name: student.name,
@@ -1089,7 +1055,6 @@
       }
     }
 
-    /* Gắn Event Listeners sau khi DOM sẵn sàng */
     document.addEventListener("DOMContentLoaded", () => {
       initViewsCounter();
 
@@ -1099,12 +1064,10 @@
       document.getElementById("btnResetWord").addEventListener("click", resetWordSlots);
       document.getElementById("btnSpeak").addEventListener("click", speakCurrentWord);
 
-      // 3 nút gợi ý riêng biệt
       document.getElementById("btnHintIpa").addEventListener("click", useHintIpa);
       document.getElementById("btnHintEn").addEventListener("click", useHintEn);
       document.getElementById("btnHintVi").addEventListener("click", useHintVi);
 
-      // Modal nộp bài sớm
       document.getElementById("btnEarlySubmit").addEventListener("click", openEarlySubmitModal);
       document.getElementById("btnCancelModal").addEventListener("click", closeEarlySubmitModal);
       document.getElementById("btnConfirmModal").addEventListener("click", finalizeGame);
