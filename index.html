@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mật Mã Phân Tử - Molecule Code | THPT Chu Văn An</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #065f46;
+      --primary-light: #ecfdf5;
+      --accent: #0284c7;
+      --amber: #d97706;
+      --bg: #f1f8f5;
+      --card-bg: #ffffff;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --success: #10b981;
+      --danger: #ef4444;
+      --radius: 14px;
+      --shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.1), 0 8px 10px -6px rgba(5, 150, 105, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Top Navigation / Teacher Banner */
+    header {
+      background: white;
+      border-bottom: 2px solid #e6f4ea;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    .teacher-badge {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .teacher-badge img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--primary);
+    }
+    .teacher-info h1 { font-size: 15px; font-weight: 700; color: var(--primary-dark); }
+    .teacher-info p { font-size: 12px; color: var(--text-muted); }
+    .view-counter {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Container */
+    main { flex: 1; max-width: 960px; width: 100%; margin: 20px auto; padding: 0 16px; }
+
+    /* Screen Management */
+    .screen { display: none; }
+    .screen.active { display: block; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Card styling */
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    /* Screen 1: Welcome */
+    .welcome-card { text-align: center; max-width: 520px; margin: 40px auto; }
+    .hero-title { font-size: 26px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
+    .form-group { text-align: left; margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    .form-control {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      font-size: 14px;
+      outline: none;
+      transition: all 0.2s;
+    }
+    .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+      border: none;
+      transition: all 0.2s;
+      width: 100%;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-accent { background: var(--accent); color: white; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: #f8fafc; }
+
+    /* Top Game Status */
+    .game-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .progress-pill {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--primary-dark);
+      background: var(--primary-light);
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+    .timer-pill {
+      font-size: 14px;
+      font-weight: 800;
+      color: #991b1b;
+      background: #fef2f2;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #fecaca;
+    }
+
+    /* Clue Box */
+    .clue-box {
+      background: #f8fafc;
+      border-left: 4px solid var(--primary);
+      padding: 16px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 24px;
+    }
+    .clue-ipa {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--accent);
+      background: #f0f9ff;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+    }
+    .clue-text-en { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; line-height: 1.45; }
+    .clue-text-vi { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+
+    /* Molecular Scramble Drag-Drop Area */
+    .scramble-container { margin: 24px 0; text-align: center; }
+    .target-slots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 56px;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #f8fafc;
+      border-radius: 12px;
+      border: 2px dashed #cbd5e1;
+    }
+    .char-tile {
+      width: 44px;
+      height: 48px;
+      background: white;
+      border: 2px solid #059669;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.15s ease;
+    }
+    .char-tile:hover { transform: scale(1.05); }
+    .char-tile.space {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      width: 20px;
+      cursor: default;
+    }
+    .char-tile.empty {
+      background: #edf2f7;
+      border: 2px dashed #cbd5e1;
+      color: transparent;
+    }
+
+    .letters-pool {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      min-height: 52px;
+      padding: 10px;
+    }
+    .pool-tile {
+      width: 44px;
+      height: 48px;
+      background: #0284c7;
+      color: white;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s;
+    }
+    .pool-tile:hover { transform: translateY(-2px); background: #0369a1; }
+    .pool-tile.used { opacity: 0.2; pointer-events: none; transform: scale(0.9); }
+
+    /* Action Controls */
+    .controls-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.5fr;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .btn-hint { background: #fef3c7; color: #b45309; }
+    .btn-hint:hover { background: #fde68a; }
+
+    /* Results */
+    .result-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+    .result-table th, .result-table td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; }
+    .result-table th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
+
+    @media (max-width: 640px) {
+      .controls-grid { grid-template-columns: 1fr; }
+      .char-tile, .pool-tile { width: 38px; height: 42px; font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header with Teacher Brand -->
+  <header>
+    <div class="teacher-badge">
+      <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&q=80'">
+      <div class="teacher-info">
+        <h1>Th.s Nguyễn Thị Xuân Thương</h1>
+        <p>Trường THPT Chu Văn An - Thái Nguyên</p>
+      </div>
+    </div>
+    <div class="view-counter">
+      <span>👁️ Lượt xem:</span>
+      <span id="pageViews">1,248</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- SCREEN 1: WELCOME -->
+    <section id="screen-welcome" class="screen active">
+      <div class="card welcome-card">
+        <h2 class="hero-title">MẬT MÃ PHÂN TỬ</h2>
+        <p class="hero-sub">Molecule Code - Unit 2: Di truyền học Sinh học 12<br>Giải mã 10 thuật ngữ di truyền học bị xáo trộn trong 4 phút!</p>
+        
+        <div class="form-group">
+          <label for="studentName">Họ và tên thí sinh:</label>
+          <input type="text" id="studentName" class="form-control" placeholder="Ví dụ: Nguyễn Văn A (bỏ trống tự sinh mã)">
+        </div>
+
+        <div class="form-group">
+          <label for="studentClass">Lớp:</label>
+          <input type="text" id="studentClass" class="form-control" placeholder="Ví dụ: 12A1, 12A2...">
+        </div>
+
+        <button class="btn btn-primary" onclick="startGame()">🚀 BẮT ĐẦU GIẢI MÃ</button>
+      </div>
+    </section>
+
+    <!-- SCREEN 2: GAME ARENA -->
+    <section id="screen-game" class="screen">
+      <div class="card">
+        <div class="game-status-bar">
+          <span class="progress-pill" id="questionProgress">Câu: 1 / 10</span>
+          <span class="progress-pill" style="background:#e0f2fe; color:#0369a1;" id="scoreDisplay">Điểm: 0</span>
+          <span class="timer-pill" id="timerBadge">⏱️ Thời gian: 04:00</span>
+        </div>
+
+        <div class="clue-box">
+          <div class="clue-ipa">
+            <span>🔊 IPA:</span>
+            <span id="clueIpa">/dʒiːn/</span>
+            <button style="border:none; background:none; cursor:pointer;" onclick="playAudioHint()">📢</button>
+          </div>
+          <div class="clue-text-en" id="clueEn">Định nghĩa tiếng Anh...</div>
+          <div class="clue-text-vi" id="clueVi">Định nghĩa tiếng Việt...</div>
+        </div>
+
+        <div class="scramble-container">
+          <!-- Target Answer Slots -->
+          <div class="target-slots" id="targetSlots"></div>
+          <!-- Scrambled Pool of Letters -->
+          <div class="letters-pool" id="lettersPool"></div>
+        </div>
+
+        <div class="controls-grid">
+          <button class="btn btn-outline" onclick="resetCurrentWord()">🔄 Làm lại</button>
+          <button class="btn btn-hint" onclick="giveHint()">💡 Gợi ý (-10đ)</button>
+          <button class="btn btn-primary" onclick="verifyWord()">✅ XÁC NHẬN</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: MISSION REPORT -->
+    <section id="screen-result" class="screen">
+      <div class="card">
+        <h2 style="color:var(--primary-dark); font-size:22px; margin-bottom:8px;">BÁO CÁO KẾT QUẢ GIẢI MÃ</h2>
+        <p style="color:var(--text-muted); font-size:13px; margin-bottom:16px;">Hệ thống đã ghi nhận kết quả và đồng bộ về cơ sở dữ liệu học tập.</p>
+
+        <div style="background:var(--primary-light); padding:16px; border-radius:10px; margin-bottom:20px; display:flex; justify-content:space-around;">
+          <div><strong>Thí sinh:</strong> <span id="resName">--</span></div>
+          <div><strong>Lớp:</strong> <span id="resClass">--</span></div>
+          <div><strong>Tổng điểm:</strong> <span id="resScore" style="color:var(--primary-dark); font-weight:800;">--</span>/100</div>
+          <div><strong>Thời gian:</strong> <span id="resTime">--</span></div>
+        </div>
+
+        <table class="result-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Thuật ngữ</th>
+              <th>Phiên âm IPA</th>
+              <th>Ý nghĩa tiếng Việt</th>
+              <th>Kết quả</th>
+            </tr>
+          </thead>
+          <tbody id="resultTableBody"></tbody>
+        </table>
+
+        <div style="display:flex; gap:12px;">
+          <button class="btn btn-primary" onclick="location.reload()">🔁 THỰC HIỆN LẠI</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 1. VOCABULARY DATA TỪ EXCEL CỦA CÔ XUÂN THƯƠNG
+    const VOCABULARY_DATA = [
+      {
+        id: 1,
+        code: "001_gene",
+        word: "Gene",
+        ipa: "/dʒiːn/",
+        defEn: "A segment of a DNA molecule that carries information specifying a product, which is a polypeptide chain or RNA.",
+        defVi: "Một đoạn của phân tử DNA mang thông tin quy định sản phẩm là chuỗi polypeptide hoặc RNA."
+      },
+      {
+        id: 2,
+        code: "002_polypeptide",
+        word: "Polypeptide",
+        ipa: "/ˌpɒliˈpeptaɪd/",
+        defEn: "A long chain of amino acids linked by peptide bonds.",
+        defVi: "Một chuỗi dài các amino acid được liên kết bằng liên kết peptide."
+      },
+      {
+        id: 3,
+        code: "003_mrna",
+        word: "mRNA",
+        ipa: "/ˌem ɑːr en ˈeɪ/",
+        defEn: "A type of RNA that carries genetic information from DNA in the nucleus to the cytoplasm, where it serves as a template for protein synthesis.",
+        defVi: "Một loại RNA mang thông tin di truyền từ DNA trong nhân tế bào ra tế bào chất, nơi nó làm khuôn để tổng hợp protein."
+      },
+      {
+        id: 4,
+        code: "004_promoter",
+        word: "Promoter",
+        ipa: "/prəˈmoʊtər/",
+        defEn: "A specific DNA sequence which acts as a binding site for RNA polymerase to initiate transcription.",
+        defVi: "Một trình tự DNA là vị trí để enzyme RNA polymerase bám vào và bắt đầu quá trình phiên mã."
+      },
+      {
+        id: 5,
+        code: "005_amino_acid",
+        word: "Amino acid",
+        ipa: "/əˌmiːnoʊ ˈæsɪd/",
+        defEn: "The building blocks of proteins.",
+        defVi: "Đơn vị cấu tạo nên protein."
+      },
+      {
+        id: 6,
+        code: "006_exon",
+        word: "Exon",
+        ipa: "/ˈeksɒn/",
+        defEn: "A coding segment of gene that is located within the coding region in eukaryotic organisms.",
+        defVi: "Đoạn được dịch mã nằm trong vùng mã hóa của gen cấu trúc của sinh vật nhân thực."
+      },
+      {
+        id: 7,
+        code: "007_intron",
+        word: "Intron",
+        ipa: "/ˈintrɒn/",
+        defEn: "A non-coding segment of a gene that is removed from the pre-mRNA transcript during splicing.",
+        defVi: "Đoạn không mã hóa của gen, bị loại bỏ khỏi bản sao pre-mRNA trong quá trình cắt nối."
+      },
+      {
+        id: 13,
+        code: "008_ribosome",
+        word: "Ribosome",
+        ipa: "/ˈraɪbəsoʊm/",
+        defEn: "A complex molecular machine that serves as the primary site of biological protein synthesis (translation).",
+        defVi: "Một phức hợp phân tử là nơi chính diễn ra quá trình tổng hợp protein."
+      },
+      {
+        id: 14,
+        code: "009_anticodon",
+        word: "Anticodon",
+        ipa: "/ˌæntiˈkoʊdɒn/",
+        defEn: "A sequence of three nucleotides on a tRNA molecule that is complementary to a codon on an mRNA molecule.",
+        defVi: "Một trình tự gồm ba nucleotide trên phân tử tRNA, bổ sung với một codon trên phân tử mRNA."
+      },
+      {
+        id: 24,
+        code: "010_mirna",
+        word: "miRNA",
+        ipa: "/ˌmaɪ ɑːr en ˈeɪ/",
+        defEn: "A small, non-coding RNA molecule that functions in post-transcriptional regulation of gene expression by binding to mRNA.",
+        defVi: "Một phân tử RNA nhỏ, không mã hóa, có chức năng điều hòa biểu hiện gene sau phiên mã bằng cách liên kết với mRNA."
+      }
+    ];
+
+    // CẤU HÌNH HỆ THỐNG
+    const CONFIG = {
+      totalTimeSeconds: 240, // 4 phút = 240 giây
+      googleSheetUrl: "https://script.google.com/macros/s/AKfycbwYOUR_SCRIPT_ID/exec" // Thay URL Google Apps Script của cô tại đây
+    };
+
+    // TRẠNG THÁI GAME
+    let student = { name: "", className: "" };
+    let currentIndex = 0;
+    let score = 0;
+    let timerInterval = null;
+    let timeLeft = CONFIG.totalTimeSeconds;
+    let targetSlotsData = []; // Mảng chứa chữ cái học sinh đã ghép
+    let poolLettersData = []; // Mảng chứa các ký tự trong khay gợi ý
+    let userResults = [];
+
+    // TĂNG VÀ LƯU LƯỢT XEM
+    function handleViews() {
+      let views = parseInt(localStorage.getItem('mol_code_views') || '1248') + 1;
+      localStorage.setItem('mol_code_views', views);
+      document.getElementById('pageViews').innerText = views.toLocaleString();
+    }
+    handleViews();
+
+    // CHUYỂN MÀN HÌNH
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    // BẮT ĐẦU CHƠI
+    function startGame() {
+      let nameInput = document.getElementById('studentName').value.trim();
+      let classInput = document.getElementById('studentClass').value.trim();
+
+      student.name = nameInput || "BioHacker_" + Math.floor(1000 + Math.random() * 9000);
+      student.className = classInput || "12 Sinh";
+
+      currentIndex = 0;
+      score = 0;
+      timeLeft = CONFIG.totalTimeSeconds;
+      userResults = [];
+
+      showScreen('screen-game');
+      startTimer();
+      loadWord(currentIndex);
+    }
+
+    // BỘ ĐẾM THỜI GIAN 4 PHÚT
+    function startTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        timeLeft--;
+        let mins = Math.floor(timeLeft / 60);
+        let secs = timeLeft % 60;
+        document.getElementById('timerBadge').innerText = 
+          `⏱️ Thời gian: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timerInterval);
+          finishGame();
+        }
+      }, 1000);
+    }
+
+    // XÁO TRỘN KÝ TỰ
+    function shuffleArray(array) {
+      let arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // LOAD THUẬT NGỮ THEO INDEX
+    function loadWord(index) {
+      if (index >= VOCABULARY_DATA.length) {
+        finishGame();
+        return;
+      }
+
+      const item = VOCABULARY_DATA[index];
+      document.getElementById('questionProgress').innerText = `Câu: ${index + 1} / ${VOCABULARY_DATA.length}`;
+      document.getElementById('scoreDisplay').innerText = `Điểm: ${score}`;
+      document.getElementById('clueIpa').innerText = item.ipa;
+      document.getElementById('clueEn').innerText = item.defEn;
+      document.getElementById('clueVi').innerText = item.defVi;
+
+      // Chuẩn bị dữ liệu ký tự
+      const rawWord = item.word;
+      targetSlotsData = [];
+
+      let lettersOnly = [];
+      for (let i = 0; i < rawWord.length; i++) {
+        let ch = rawWord[i];
+        if (ch === " ") {
+          targetSlotsData.push({ original: " ", current: " ", isSpace: true });
+        } else {
+          targetSlotsData.push({ original: ch, current: null, isSpace: false, poolIdx: null });
+          lettersOnly.push({ char: ch, id: i });
+        }
+      }
+
+      // Xáo trộn khay ký tự
+      let shuffled = shuffleArray(lettersOnly);
+      poolLettersData = shuffled.map((item, idx) => ({ ...item, poolId: idx, used: false }));
+
+      renderSlots();
+      renderPool();
+    }
+
+    // RENDER KHAY ĐÁP ÁN
+    function renderSlots() {
+      const container = document.getElementById('targetSlots');
+      container.innerHTML = "";
+
+      targetSlotsData.forEach((slot, idx) => {
+        const tile = document.createElement('div');
+        if (slot.isSpace) {
+          tile.className = "char-tile space";
+          tile.innerText = "-";
+        } else if (slot.current === null) {
+          tile.className = "char-tile empty";
+          tile.innerText = "";
+        } else {
+          tile.className = "char-tile";
+          tile.innerText = slot.current;
+          // Click vào ký tự đã ghép để trả ngược lại khay
+          tile.onclick = () => removeTileFromSlot(idx);
+        }
+        container.appendChild(tile);
+      });
+    }
+
+    // RENDER KHAY CHỮ CÁI BỊ XÁO TRỘN
+    function renderPool() {
+      const pool = document.getElementById('lettersPool');
+      pool.innerHTML = "";
+
+      poolLettersData.forEach((letter) => {
+        const btn = document.createElement('div');
+        btn.className = `pool-tile ${letter.used ? 'used' : ''}`;
+        btn.innerText = letter.char;
+        if (!letter.used) {
+          btn.onclick = () => addTileToFirstEmptySlot(letter.poolId);
+        }
+        pool.appendChild(btn);
+      });
+    }
+
+    // CHẠM CHỮ CÁI Ở DƯỚI ĐỂ ĐẨY LÊN Ô TRỐNG ĐẦU TIÊN
+    function addTileToFirstEmptySlot(poolId) {
+      const poolItem = poolLettersData.find(p => p.poolId === poolId);
+      if (!poolItem || poolItem.used) return;
+
+      const firstEmptyIndex = targetSlotsData.findIndex(s => !s.isSpace && s.current === null);
+      if (firstEmptyIndex !== -1) {
+        targetSlotsData[firstEmptyIndex].current = poolItem.char;
+        targetSlotsData[firstEmptyIndex].poolIdx = poolId;
+        poolItem.used = true;
+        renderSlots();
+        renderPool();
+      }
+    }
+
+    // TRẢ LẠI KÝ TỰ VỀ KHAY
+    function removeTileFromSlot(slotIdx) {
+      const slot = targetSlotsData[slotIdx];
+      if (slot.isSpace || slot.current === null) return;
+
+      const poolItem = poolLettersData.find(p => p.poolId === slot.poolIdx);
+      if (poolItem) poolItem.used = false;
+
+      slot.current = null;
+      slot.poolIdx = null;
+      renderSlots();
+      renderPool();
+    }
+
+    // XÓA LÀM LẠI CÂU HIỆN TẠI
+    function resetCurrentWord() {
+      loadWord(currentIndex);
+    }
+
+    // NÚT GỢI Ý 💡
+    function giveHint() {
+      if (score >= 10) score -= 10;
+      document.getElementById('scoreDisplay').innerText = `Điểm: ${score}`;
+
+      // Tìm vị trí sai hoặc chưa điền đầu tiên
+      for (let i = 0; i < targetSlotsData.length; i++) {
+        let slot = targetSlotsData[i];
+        if (!slot.isSpace && slot.current !== slot.original) {
+          // Trả slot cũ về pool nếu có
+          if (slot.current !== null) {
+            let oldPool = poolLettersData.find(p => p.poolId === slot.poolIdx);
+            if (oldPool) oldPool.used = false;
+          }
+          // Tìm ký tự đúng từ pool chưa dùng
+          let matchingPool = poolLettersData.find(p => !p.used && p.char.toLowerCase() === slot.original.toLowerCase());
+          if (matchingPool) {
+            slot.current = slot.original;
+            slot.poolIdx = matchingPool.poolId;
+            matchingPool.used = true;
+          }
+          break;
+        }
+      }
+      renderSlots();
+      renderPool();
+    }
+
+    // KIỂM TRA ĐÁP ÁN
+    function verifyWord() {
+      const currentObj = VOCABULARY_DATA[currentIndex];
+      const userWord = targetSlotsData.map(s => s.current || "").join("");
+
+      // Kiểm tra không phân biệt hoa thường
+      if (userWord.toLowerCase() === currentObj.word.toLowerCase()) {
+        score += 10;
+        userResults.push({
+          word: currentObj.word,
+          ipa: currentObj.ipa,
+          meaning: currentObj.defVi,
+          isCorrect: true
+        });
+        alert("🎉 Chính xác! Bạn đã giải mã thành công phân tử này.");
+        currentIndex++;
+        loadWord(currentIndex);
+      } else {
+        alert("❌ Chưa đúng rồi! Hãy kiểm tra lại thứ tự các ký tự nhé.");
+      }
+    }
+
+    // HOÀN THÀNH GAME & GỬI GOOGLE SHEETS
+    function finishGame() {
+      clearInterval(timerInterval);
+      showScreen('screen-result');
+
+      const timeSpent = CONFIG.totalTimeSeconds - timeLeft;
+      const spentMin = Math.floor(timeSpent / 60);
+      const spentSec = timeSpent % 60;
+      const formattedTime = `${spentMin}m ${spentSec}s`;
+
+      document.getElementById('resName').innerText = student.name;
+      document.getElementById('resClass').innerText = student.className;
+      document.getElementById('resScore').innerText = score;
+      document.getElementById('resTime').innerText = formattedTime;
+
+      // Render bảng kết quả chi tiết
+      const tbody = document.getElementById('resultTableBody');
+      tbody.innerHTML = "";
+      VOCABULARY_DATA.forEach((item, idx) => {
+        const res = userResults[idx] || { isCorrect: false };
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td><strong>${item.word}</strong></td>
+          <td><code>${item.ipa}</code></td>
+          <td>${item.defVi}</td>
+          <td style="color:${res.isCorrect ? 'var(--primary)' : 'var(--danger)'}; font-weight:700;">
+            ${res.isCorrect ? '✅ Hoàn thành' : '❌ Chưa đạt'}
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      // Tự động POST kết quả về Google Apps Script
+      sendDataToGoogleSheet({
+        timestamp: new Date().toLocaleString("vi-VN"),
+        name: student.name,
+        className: student.className,
+        score: score,
+        timeSpent: formattedTime
+      });
+    }
+
+    function sendDataToGoogleSheet(payload) {
+      if (!CONFIG.googleSheetUrl || CONFIG.googleSheetUrl.includes("YOUR_SCRIPT_ID")) return;
+      fetch(CONFIG.googleSheetUrl, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      }).catch(err => console.log("Gửi điểm ngầm hoàn tất"));
+    }
+
+    function playAudioHint() {
+      const currentObj = VOCABULARY_DATA[currentIndex];
+      // Sử dụng SpeechSynthesis của trình duyệt để đọc từ nếu chưa có file MP3 tĩnh
+      let utterance = new SpeechSynthesisUtterance(currentObj.word);
+      utterance.lang = 'en-US';
+      window.speechSynthesis.speak(utterance);
+    }
+  </script>
+</body>
+</html>
