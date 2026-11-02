@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mật Mã Phân Tử - Molecule Code | Th.s Nguyễn Thị Xuân Thương</title>
+  <title>Mật Mã Phân Tử - Molecule Code | THPT Chu Văn An</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,7 +31,7 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* Header Bar */
+    /* Top Header */
     header {
       background: #ffffff;
       border-bottom: 2px solid #e2f0d9;
@@ -42,37 +42,38 @@
       box-shadow: 0 2px 10px rgba(0,0,0,0.04);
       position: sticky;
       top: 0;
-      z-index: 50;
+      z-index: 100;
     }
-    .header-badge {
+    .teacher-badge {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
     }
-    .header-avatar {
-      width: 50px;
-      height: 50px;
+    .teacher-badge img {
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--primary);
-      box-shadow: 0 2px 6px rgba(5, 150, 105, 0.2);
+      border: 3px solid var(--primary);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+      background-color: #e2e8f0;
     }
-    .header-title h1 {
-      font-size: 16px;
+    .teacher-info h1 {
+      font-size: 18px;
       font-weight: 800;
       color: var(--primary-dark);
-      line-height: 1.25;
+      line-height: 1.3;
     }
-    .header-title p {
-      font-size: 12px;
+    .teacher-info p {
+      font-size: 13px;
       font-weight: 600;
       color: var(--text-muted);
     }
-    .views-counter-badge {
+    .view-counter {
       background: var(--primary-light);
       color: var(--primary-dark);
-      padding: 7px 16px;
-      border-radius: 20px;
+      padding: 8px 16px;
+      border-radius: 24px;
       font-size: 13px;
       font-weight: 700;
       display: flex;
@@ -82,14 +83,14 @@
     }
 
     /* Container */
-    main { flex: 1; max-width: 960px; width: 100%; margin: 24px auto; padding: 0 16px; }
+    main { flex: 1; max-width: 980px; width: 100%; margin: 24px auto; padding: 0 16px; }
 
-    /* Screen Transition */
+    /* Screens */
     .screen { display: none; }
     .screen.active { display: block; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
     @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Card Box */
+    /* Cards */
     .card {
       background: var(--card-bg);
       border-radius: var(--radius);
@@ -98,38 +99,18 @@
       border: 1px solid var(--border);
     }
 
-    /* Screen 1: Welcome Hero Card */
-    .welcome-card { max-width: 560px; margin: 20px auto; text-align: center; }
-    .teacher-portrait-wrap {
-      margin: 0 auto 16px;
-      width: 124px;
-      height: 124px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--primary), var(--accent));
-      box-shadow: 0 8px 20px rgba(5, 150, 105, 0.25);
-    }
-    .teacher-portrait-wrap img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      background: #ffffff;
-    }
-    .teacher-welcome-name { font-size: 17px; font-weight: 800; color: var(--primary-dark); }
-    .teacher-welcome-school { font-size: 13px; color: var(--text-muted); font-weight: 600; margin-bottom: 16px; }
-
-    .hero-title { font-size: 28px; font-weight: 800; color: var(--primary-dark); margin-bottom: 6px; letter-spacing: -0.5px; }
-    .hero-sub { font-size: 14px; color: var(--text-muted); line-height: 1.55; margin-bottom: 22px; }
-
-    .form-group { text-align: left; margin-bottom: 16px; }
+    /* Welcome Screen */
+    .welcome-card { max-width: 560px; margin: 30px auto; text-align: center; }
+    .hero-title { font-size: 28px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; letter-spacing: -0.5px; }
+    .hero-sub { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+    .form-group { text-align: left; margin-bottom: 18px; }
     .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #334155; }
     .form-control {
       width: 100%;
       padding: 12px 16px;
       border-radius: 10px;
       border: 1.5px solid var(--border);
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
       transition: all 0.2s;
     }
@@ -157,13 +138,11 @@
     .btn-accent:hover { background: var(--accent-dark); }
     .btn-danger { background: var(--danger); color: white; }
     .btn-danger:hover { background: #dc2626; }
-    .btn-hint { background: var(--amber-light); color: var(--amber); border: 1px solid #fde68a; }
-    .btn-hint:hover { background: #fde68a; }
     .btn-outline { background: transparent; border: 1.5px solid var(--border); color: #475569; }
     .btn-outline:hover { background: #f8fafc; }
     .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
 
-    /* Game Top Status Bar */
+    /* Game Top Bar */
     .game-top-bar {
       display: flex;
       justify-content: space-between;
@@ -185,45 +164,105 @@
     .badge-score { background: #e0f2fe; color: #0369a1; }
     .badge-timer { background: var(--danger-light); color: #991b1b; border: 1px solid #fecaca; }
 
-    /* Clue Box */
+    /* Clue Box & Interactive Hint System */
     .clue-card {
       background: #f8fafc;
       border-left: 5px solid var(--primary);
-      border-radius: 4px 12px 12px 4px;
-      padding: 16px 20px;
+      border-radius: 4px 14px 14px 4px;
+      padding: 18px 22px;
       margin-bottom: 24px;
     }
-    .clue-ipa-row {
+    .hint-buttons-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .btn-hint-item {
+      background: #ffffff;
+      border: 1.5px dashed var(--amber);
+      color: #b45309;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
       display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-hint-item:hover:not(:disabled) {
+      background: var(--amber-light);
+      border-style: solid;
+      transform: translateY(-1px);
+    }
+    .btn-hint-item:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+    }
+
+    /* Hint Content Reveal Areas */
+    .hint-content-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .clue-ipa-row {
+      display: none;
       align-items: center;
       gap: 10px;
       background: #f0fdf4;
-      padding: 4px 12px;
-      border-radius: 6px;
-      margin-bottom: 10px;
+      padding: 6px 14px;
+      border-radius: 8px;
       border: 1px solid #bbf7d0;
+      width: fit-content;
+      animation: fadeIn 0.25s ease;
     }
-    .ipa-text { font-size: 15px; font-weight: 800; color: var(--primary-dark); letter-spacing: 0.5px; }
+    .ipa-text { font-size: 16px; font-weight: 800; color: var(--primary-dark); letter-spacing: 0.5px; }
     .btn-audio {
       background: none;
       border: none;
       cursor: pointer;
-      font-size: 16px;
+      font-size: 18px;
       color: var(--accent);
       padding: 2px 4px;
     }
-    .clue-en { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; line-height: 1.45; }
-    .clue-vi { font-size: 13.5px; color: var(--text-muted); line-height: 1.45; }
+    .clue-en {
+      display: none;
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #0f172a;
+      line-height: 1.5;
+      padding: 8px 12px;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      animation: fadeIn 0.25s ease;
+    }
+    .clue-vi {
+      display: none;
+      font-size: 14px;
+      font-weight: 500;
+      color: #475569;
+      line-height: 1.5;
+      padding: 8px 12px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      animation: fadeIn 0.25s ease;
+    }
 
-    /* Interaction Zone */
+    /* Molecular Scramble Board */
     .scramble-area { margin: 24px 0; text-align: center; }
     .slots-container {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
-      min-height: 58px;
-      margin-bottom: 18px;
+      min-height: 60px;
+      margin-bottom: 20px;
       padding: 12px;
       background: #f8fafc;
       border-radius: 12px;
@@ -247,8 +286,18 @@
       transition: transform 0.15s ease;
     }
     .char-box:hover { transform: translateY(-2px); }
-    .char-box.space { background: transparent; border: none; box-shadow: none; width: 20px; cursor: default; }
-    .char-box.empty { background: #edf2f7; border: 2px dashed #94a3b8; color: transparent; }
+    .char-box.space {
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      width: 20px;
+      cursor: default;
+    }
+    .char-box.empty {
+      background: #edf2f7;
+      border: 2px dashed #94a3b8;
+      color: transparent;
+    }
 
     .pool-container {
       display: flex;
@@ -277,23 +326,33 @@
     .pool-tile:hover { transform: translateY(-2px); background: var(--accent-dark); }
     .pool-tile.used { opacity: 0.2; pointer-events: none; transform: scale(0.9); }
 
-    /* Instant Feedback Notice */
+    /* Result Feedback Banner */
     .feedback-banner {
-      padding: 12px 18px;
+      padding: 14px 20px;
       border-radius: 10px;
-      margin: 14px 0;
+      margin: 16px 0;
       display: none;
       align-items: center;
-      justify-content: center;
-      font-size: 14.5px;
+      justify-content: space-between;
+      font-size: 15px;
       font-weight: 700;
       animation: fadeIn 0.25s ease;
     }
     @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
-    .feedback-banner.correct { display: flex; background: #ecfdf5; color: #065f46; border: 1.5px solid #a7f3d0; }
-    .feedback-banner.incorrect { display: flex; background: #fef2f2; color: #991b1b; border: 1.5px solid #fecaca; }
+    .feedback-banner.correct {
+      display: flex;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1.5px solid #a7f3d0;
+    }
+    .feedback-banner.incorrect {
+      display: flex;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1.5px solid #fecaca;
+    }
 
-    /* Action Toolbar */
+    /* Actions Grid */
     .action-bar {
       display: flex;
       gap: 10px;
@@ -301,9 +360,9 @@
       align-items: center;
       margin-top: 10px;
     }
-    .action-bar .btn { flex: 1; min-width: 130px; }
+    .action-bar .btn { flex: 1; min-width: 140px; }
 
-    /* Early Submit Modal */
+    /* Modal */
     .modal-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -325,54 +384,51 @@
       box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2);
     }
 
-    /* Result Table */
+    /* Report Table */
     .report-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
     .report-table th, .report-table td { padding: 12px 14px; border: 1px solid var(--border); text-align: left; }
     .report-table th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
 
+    /* Responsive */
     @media (max-width: 640px) {
-      header { padding: 10px 16px; }
-      .header-avatar { width: 44px; height: 44px; }
-      .header-title h1 { font-size: 14px; }
-      .header-title p { font-size: 11px; }
+      header { padding: 12px 16px; }
+      .teacher-badge img { width: 56px; height: 56px; }
+      .teacher-info h1 { font-size: 15px; }
+      .teacher-info p { font-size: 11px; }
       .char-box, .pool-tile { width: 36px; height: 42px; font-size: 16px; }
       .action-bar .btn { flex: 1 1 calc(50% - 5px); }
+      .hint-buttons-row { flex-direction: column; }
+      .btn-hint-item { width: 100%; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header Bar with Profile & Views Counter -->
+  <!-- Top Header with Teacher Brand & Views Counter starting at 95 -->
   <header>
-    <div class="header-badge">
-      <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" class="header-avatar" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&q=80';">
-      <div class="header-title">
+    <div class="teacher-badge">
+      <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&q=80';">
+      <div class="teacher-info">
         <h1>Th.s Nguyễn Thị Xuân Thương</h1>
         <p>Trường THPT Chu Văn An - Thái Nguyên</p>
       </div>
     </div>
-    <div class="views-counter-badge">
+    <div class="view-counter">
       <span>👁️ Lượt xem:</span>
       <span id="pageViewsDisplay">95</span>
     </div>
   </header>
 
   <main>
-    <!-- SCREEN 1: WELCOME SCREEN (LARGE AVATAR & REGISTRATION) -->
+    <!-- SCREEN 1: WELCOME SCREEN -->
     <section id="screen-welcome" class="screen active">
       <div class="card welcome-card">
-        <div class="teacher-portrait-wrap">
-          <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=400&q=80';">
-        </div>
-        <div class="teacher-welcome-name">Th.s Nguyễn Thị Xuân Thương</div>
-        <div class="teacher-welcome-school">Trường THPT Chu Văn An - Thái Nguyên</div>
-
         <h2 class="hero-title">MẬT MÃ PHÂN TỬ</h2>
-        <p class="hero-sub">Molecule Code - Sinh học 12 (Unit 2: Di truyền học phân tử)<br>Giải mã đúng thứ tự 10 thuật ngữ di truyền trong tối đa <strong>4 phút</strong>.</p>
-
+        <p class="hero-sub">Molecule Code - Sinh học 12 (Unit 2: Di truyền học)<br>Sắp xếp đúng 10 thuật ngữ di truyền phân tử bị xáo trộn.<br>Tổng thời gian làm bài tối đa: <strong>4 phút</strong>.<br><small style="color:var(--amber); font-weight:600;">*Sử dụng gợi ý sẽ bị trừ điểm tương ứng trên tổng điểm câu.</small></p>
+        
         <div class="form-group">
           <label for="studentName">Họ và tên học sinh:</label>
-          <input type="text" id="studentName" class="form-control" placeholder="Nhập họ và tên (hoặc bỏ trống để tự sinh mã)">
+          <input type="text" id="studentName" class="form-control" placeholder="Nhập họ và tên (hoặc để trống để sinh mã tự động)">
         </div>
 
         <div class="form-group">
@@ -380,16 +436,16 @@
           <input type="text" id="studentClass" class="form-control" placeholder="Ví dụ: 12A1, 12A2, 12 Chuyên Sinh...">
         </div>
 
-        <button type="button" class="btn btn-primary" id="btnStartGame" style="width: 100%; padding: 14px; font-size: 15px;">
+        <button type="button" class="btn btn-primary" id="btnStartGame" style="width: 100%; padding: 14px;">
           🚀 BẮT ĐẦU GIẢI MÃ
         </button>
       </div>
     </section>
 
-    <!-- SCREEN 2: GAMEPLAY ARENA (MOLECULAR DECODER) -->
+    <!-- SCREEN 2: GAMEPLAY ARENA -->
     <section id="screen-game" class="screen">
       <div class="card">
-        <!-- Status Bar -->
+        <!-- Top status bar with metrics & early submit button -->
         <div class="game-top-bar">
           <div class="badge-group">
             <span class="badge badge-progress" id="progressText">Câu: 1 / 10</span>
@@ -401,39 +457,53 @@
           </button>
         </div>
 
-        <!-- Clue / Definition Card -->
+        <!-- Clue / Interactive Hint Card (Default: Hidden contents, only 3 hint buttons) -->
         <div class="clue-card">
-          <div class="clue-ipa-row">
-            <span>🔊 IPA:</span>
-            <span class="ipa-text" id="clueIpa">/dʒiːn/</span>
-            <button type="button" class="btn-audio" title="Nghe phát âm chuẩn" id="btnSpeak">📢</button>
+          <div class="hint-buttons-row">
+            <button type="button" class="btn-hint-item" id="btnHintIpa">
+              💡 Gợi ý phiên âm IPA (-2đ)
+            </button>
+            <button type="button" class="btn-hint-item" id="btnHintEn">
+              💡 Gợi ý định nghĩa tiếng Anh (-3đ)
+            </button>
+            <button type="button" class="btn-hint-item" id="btnHintVi">
+              💡 Gợi ý định nghĩa tiếng Việt (-5đ)
+            </button>
           </div>
-          <div class="clue-en" id="clueDefEn">A segment of a DNA molecule...</div>
-          <div class="clue-vi" id="clueDefVi">Một đoạn của phân tử DNA...</div>
+
+          <!-- Revealed Hint Areas -->
+          <div class="hint-content-wrap">
+            <div class="clue-ipa-row" id="ipaBox">
+              <span>🔊 IPA:</span>
+              <span class="ipa-text" id="clueIpa">/dʒiːn/</span>
+              <button type="button" class="btn-audio" title="Nghe phát âm chuẩn" id="btnSpeak">📢</button>
+            </div>
+            <div class="clue-en" id="clueDefEn"></div>
+            <div class="clue-vi" id="clueDefVi"></div>
+          </div>
         </div>
 
-        <!-- Molecular Scramble Interactive Board -->
+        <!-- Scramble Interaction Board -->
         <div class="scramble-area">
           <div class="slots-container" id="targetSlots"></div>
           <div class="pool-container" id="lettersPool"></div>
         </div>
 
-        <!-- Instant Feedback Banner -->
+        <!-- Feedback Notification Banner -->
         <div id="feedbackBanner" class="feedback-banner">
           <span id="feedbackText">--</span>
         </div>
 
-        <!-- Actions Toolbar -->
+        <!-- Action Buttons -->
         <div class="action-bar">
           <button type="button" class="btn btn-outline" id="btnResetWord">🔄 Làm lại</button>
-          <button type="button" class="btn btn-hint" id="btnHint">💡 Gợi ý (-10đ)</button>
           <button type="button" class="btn btn-primary" id="btnConfirm">✅ XÁC NHẬN</button>
           <button type="button" class="btn btn-accent" id="btnNextWord" disabled>Tiếp theo ➡️</button>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 3: MISSION REPORT -->
+    <!-- SCREEN 3: SUMMARY REPORT -->
     <section id="screen-report" class="screen">
       <div class="card">
         <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px;">
@@ -486,7 +556,7 @@
 
   <script>
     /* ========================================================
-       1. BỘ DỮ LIỆU 10 THUẬT NGỮ CHUẨN HOÁ
+       1. BỘ DỮ LIỆU CHUẨN 10 THUẬT NGỮ EXCEL (UNIT 2 SH12)
        ======================================================== */
     const VOCABULARY_DATA = [
       {
@@ -572,15 +642,15 @@
     ];
 
     /* ========================================================
-       2. CẤU HÌNH THỜI GIAN & GOOGLE SHEETS BACKEND
+       2. CẤU HÌNH HỆ THỐNG
        ======================================================== */
     const CONFIG = {
       totalTimeSeconds: 240, // 4 phút = 240 giây
-      googleSheetUrl: "https://script.google.com/macros/s/AKfycbw--jPGsKZMa7_tUJfgZXsa86o09qIfBgjRMJundQmEQi-JSAk1dDpR8zVY5Z7ZzDxgEg/exec" // Thay bằng URL Apps Script của cô
+      googleSheetUrl: "https://script.google.com/macros/s/AKfycbxYtBDtOZfyrgZZqWctCFOMCxoRYnHOSlk4KPqpkuowzNPObcTBbQ5nbh7BsqNRuMi30A/exec" // URL Apps Script
     };
 
     /* ========================================================
-       3. BỘ ÂM THANH NỘI BỘ (WEB AUDIO API AN TOÀN)
+       3. BỘ PHÁT ÂM THANH AN TOÀN (WEB AUDIO SYNTHESIZER)
        ======================================================== */
     let audioCtx = null;
     function getAudioContext() {
@@ -613,7 +683,7 @@
         osc.start(ctx.currentTime + delay);
         osc.stop(ctx.currentTime + delay + duration);
       } catch (err) {
-        console.warn("Sound error", err);
+        console.warn("Sound play error", err);
       }
     }
 
@@ -648,7 +718,7 @@
     }
 
     /* ========================================================
-       5. QUẢN LÝ TRẠNG THÁI & LOGIC TRÒ CHƠI
+       5. QUẢN LÝ TRẠNG THÁI VÀ LOGIC GAME
        ======================================================== */
     let student = { name: "", className: "" };
     let currentIndex = 0;
@@ -659,6 +729,9 @@
     let poolLettersData = [];
     let userResults = [];
     let isCurrentWordVerified = false;
+
+    // Quản lý trạng thái mở gợi ý trong từng câu
+    let hintsUsed = { ipa: false, en: false, vi: false };
 
     function showScreen(screenId) {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
@@ -717,13 +790,31 @@
       }
 
       isCurrentWordVerified = false;
+      hintsUsed = { ipa: false, en: false, vi: false };
       const item = VOCABULARY_DATA[index];
 
       document.getElementById("progressText").innerText = `Câu: ${index + 1} / ${VOCABULARY_DATA.length}`;
       document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
+
+      // Reset nội dung gợi ý (Mặc định ẩn)
       document.getElementById("clueIpa").innerText = item.ipa;
       document.getElementById("clueDefEn").innerText = item.defEn;
       document.getElementById("clueDefVi").innerText = item.defVi;
+
+      document.getElementById("ipaBox").style.display = "none";
+      document.getElementById("clueDefEn").style.display = "none";
+      document.getElementById("clueDefVi").style.display = "none";
+
+      // Reset các nút gợi ý
+      const btnIpa = document.getElementById("btnHintIpa");
+      const btnEn = document.getElementById("btnHintEn");
+      const btnVi = document.getElementById("btnHintVi");
+      btnIpa.disabled = false;
+      btnEn.disabled = false;
+      btnVi.disabled = false;
+      btnIpa.innerHTML = "💡 Gợi ý phiên âm IPA (-2đ)";
+      btnEn.innerHTML = "💡 Gợi ý định nghĩa tiếng Anh (-3đ)";
+      btnVi.innerHTML = "💡 Gợi ý định nghĩa tiếng Việt (-5đ)";
 
       const banner = document.getElementById("feedbackBanner");
       banner.style.display = "none";
@@ -732,7 +823,6 @@
       document.getElementById("btnNextWord").disabled = true;
       document.getElementById("btnConfirm").disabled = false;
       document.getElementById("btnResetWord").disabled = false;
-      document.getElementById("btnHint").disabled = false;
 
       targetSlotsData = [];
       let lettersOnly = [];
@@ -752,6 +842,40 @@
 
       renderSlots();
       renderPool();
+    }
+
+    /* Các hàm xử lý mở gợi ý có trừ điểm */
+    function useHintIpa() {
+      if (hintsUsed.ipa || isCurrentWordVerified) return;
+      hintsUsed.ipa = true;
+      score = Math.max(0, score - 2);
+      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
+      document.getElementById("ipaBox").style.display = "inline-flex";
+      const btn = document.getElementById("btnHintIpa");
+      btn.disabled = true;
+      btn.innerHTML = "✅ Đã mở IPA (-2đ)";
+    }
+
+    function useHintEn() {
+      if (hintsUsed.en || isCurrentWordVerified) return;
+      hintsUsed.en = true;
+      score = Math.max(0, score - 3);
+      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
+      document.getElementById("clueDefEn").style.display = "block";
+      const btn = document.getElementById("btnHintEn");
+      btn.disabled = true;
+      btn.innerHTML = "✅ Đã mở Định nghĩa Anh (-3đ)";
+    }
+
+    function useHintVi() {
+      if (hintsUsed.vi || isCurrentWordVerified) return;
+      hintsUsed.vi = true;
+      score = Math.max(0, score - 5);
+      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
+      document.getElementById("clueDefVi").style.display = "block";
+      const btn = document.getElementById("btnHintVi");
+      btn.disabled = true;
+      btn.innerHTML = "✅ Đã mở Định nghĩa Việt (-5đ)";
     }
 
     function renderSlots() {
@@ -823,30 +947,15 @@
 
     function resetWordSlots() {
       if (isCurrentWordVerified) return;
-      loadQuestion(currentIndex);
-    }
-
-    function giveHintLetter() {
-      if (isCurrentWordVerified) return;
-      if (score >= 10) score -= 10;
-      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
-
-      for (let i = 0; i < targetSlotsData.length; i++) {
-        let slot = targetSlotsData[i];
-        if (!slot.isSpace && slot.current !== slot.original) {
-          if (slot.current !== null) {
-            let oldP = poolLettersData.find(p => p.poolId === slot.poolIdx);
-            if (oldP) oldP.used = false;
-          }
-          let match = poolLettersData.find(p => !p.used && p.char.toLowerCase() === slot.original.toLowerCase());
-          if (match) {
-            slot.current = slot.original;
-            slot.poolIdx = match.poolId;
-            match.used = true;
-          }
-          break;
+      targetSlotsData.forEach(slot => {
+        if (!slot.isSpace) {
+          slot.current = null;
+          slot.poolIdx = null;
         }
-      }
+      });
+      poolLettersData.forEach(letter => {
+        letter.used = false;
+      });
       renderSlots();
       renderPool();
     }
@@ -865,12 +974,19 @@
         document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
 
         banner.className = "feedback-banner correct";
-        textSpan.innerHTML = `🎉 <strong>CHÍNH XÁC!</strong> Bạn đã giải mã thành công: <u>${currentItem.word}</u>. Nhấn "Tiếp theo ➡️" để tiếp tục.`;
+        textSpan.innerHTML = `🎉 <strong>CHÍNH XÁC!</strong> Bạn đã giải mã thành công phân tử <u>${currentItem.word}</u>. Bấm "Tiếp theo ➡️" để tiếp tục.`;
+
+        // Tự động mở toàn bộ gợi ý sau khi trả lời đúng để học sinh ôn lại
+        document.getElementById("ipaBox").style.display = "inline-flex";
+        document.getElementById("clueDefEn").style.display = "block";
+        document.getElementById("clueDefVi").style.display = "block";
 
         isCurrentWordVerified = true;
         document.getElementById("btnConfirm").disabled = true;
         document.getElementById("btnResetWord").disabled = true;
-        document.getElementById("btnHint").disabled = true;
+        document.getElementById("btnHintIpa").disabled = true;
+        document.getElementById("btnHintEn").disabled = true;
+        document.getElementById("btnHintVi").disabled = true;
         document.getElementById("btnNextWord").disabled = false;
 
         userResults[currentIndex] = {
@@ -882,7 +998,7 @@
       } else {
         playErrorSound();
         banner.className = "feedback-banner incorrect";
-        textSpan.innerHTML = `❌ <strong>CHƯA CHÍNH XÁC!</strong> Thứ tự các ký tự chưa đúng. Hãy sắp xếp lại hoặc bấm gợi ý!`;
+        textSpan.innerHTML = `❌ <strong>CHƯA CHÍNH XÁC!</strong> Thứ tự các ký tự chưa đúng. Hãy sắp xếp lại hoặc sử dụng gợi ý!`;
 
         userResults[currentIndex] = {
           word: currentItem.word,
@@ -904,7 +1020,7 @@
     function openEarlySubmitModal() {
       const answeredCount = userResults.filter(r => r && r.isCorrect).length;
       document.getElementById("modalConfirmText").innerText = 
-        `Bạn đã giải đúng ${answeredCount}/10 từ với tổng số điểm: ${score} điểm. Bạn có chắc chắn muốn nộp bài ngay bây giờ?`;
+        `Bạn đã giải đúng ${answeredCount}/10 từ với tổng số điểm: ${score} điểm. Bạn có muốn kết thúc và nộp bài ngay bây giờ?`;
       document.getElementById("confirmModal").classList.add("active");
     }
 
@@ -938,13 +1054,12 @@
           <td><code style="color:var(--accent); font-weight:700;">${item.ipa}</code></td>
           <td>${item.defVi}</td>
           <td style="font-weight:700; color:${res && res.isCorrect ? 'var(--primary)' : 'var(--danger)'};">
-            ${res && res.isCorrect ? '✅ Đúng (+10đ)' : '❌ Chưa đạt'}
+            ${res && res.isCorrect ? '✅ Đúng' : '❌ Chưa đạt'}
           </td>
         `;
         tbody.appendChild(tr);
       });
 
-      // Tự động POST ngầm về Google Apps Script
       sendToGoogleSheet({
         timestamp: new Date().toLocaleString("vi-VN"),
         name: student.name,
@@ -982,9 +1097,14 @@
       document.getElementById("btnConfirm").addEventListener("click", verifyWord);
       document.getElementById("btnNextWord").addEventListener("click", nextQuestion);
       document.getElementById("btnResetWord").addEventListener("click", resetWordSlots);
-      document.getElementById("btnHint").addEventListener("click", giveHintLetter);
       document.getElementById("btnSpeak").addEventListener("click", speakCurrentWord);
 
+      // 3 nút gợi ý riêng biệt
+      document.getElementById("btnHintIpa").addEventListener("click", useHintIpa);
+      document.getElementById("btnHintEn").addEventListener("click", useHintEn);
+      document.getElementById("btnHintVi").addEventListener("click", useHintVi);
+
+      // Modal nộp bài sớm
       document.getElementById("btnEarlySubmit").addEventListener("click", openEarlySubmitModal);
       document.getElementById("btnCancelModal").addEventListener("click", closeEarlySubmitModal);
       document.getElementById("btnConfirmModal").addEventListener("click", finalizeGame);
