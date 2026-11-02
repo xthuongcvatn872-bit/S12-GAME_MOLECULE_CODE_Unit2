@@ -13,7 +13,9 @@
       --primary-dark: #065f46;
       --primary-light: #ecfdf5;
       --accent: #0284c7;
+      --accent-dark: #0369a1;
       --amber: #d97706;
+      --amber-light: #fef3c7;
       --bg: #f1f8f5;
       --card-bg: #ffffff;
       --text: #1e293b;
@@ -21,251 +23,307 @@
       --border: #e2e8f0;
       --success: #10b981;
       --danger: #ef4444;
-      --radius: 14px;
-      --shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.1), 0 8px 10px -6px rgba(5, 150, 105, 0.1);
+      --danger-light: #fef2f2;
+      --radius: 16px;
+      --shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.12), 0 8px 10px -6px rgba(5, 150, 105, 0.08);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
     body { background-color: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; }
 
-    /* Top Navigation / Teacher Banner */
+    /* Header & Large Teacher Avatar */
     header {
-      background: white;
-      border-bottom: 2px solid #e6f4ea;
-      padding: 12px 20px;
+      background: #ffffff;
+      border-bottom: 2px solid #e2f0d9;
+      padding: 14px 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
     .teacher-badge {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 16px;
     }
     .teacher-badge img {
-      width: 48px;
-      height: 48px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid var(--primary);
+      border: 3px solid var(--primary);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
     }
-    .teacher-info h1 { font-size: 15px; font-weight: 700; color: var(--primary-dark); }
-    .teacher-info p { font-size: 12px; color: var(--text-muted); }
+    .teacher-info h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--primary-dark);
+      line-height: 1.3;
+    }
+    .teacher-info p {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
     .view-counter {
       background: var(--primary-light);
       color: var(--primary-dark);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12px;
-      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 24px;
+      font-size: 13px;
+      font-weight: 700;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
+      border: 1px solid #a7f3d0;
     }
 
     /* Container */
-    main { flex: 1; max-width: 960px; width: 100%; margin: 20px auto; padding: 0 16px; }
+    main { flex: 1; max-width: 980px; width: 100%; margin: 24px auto; padding: 0 16px; }
 
-    /* Screen Management */
+    /* Screen visibility */
     .screen { display: none; }
-    .screen.active { display: block; animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    .screen.active { display: block; animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    /* Card styling */
+    /* Cards */
     .card {
       background: var(--card-bg);
       border-radius: var(--radius);
-      padding: 28px;
+      padding: 30px;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
     }
 
-    /* Screen 1: Welcome */
-    .welcome-card { text-align: center; max-width: 520px; margin: 40px auto; }
-    .hero-title { font-size: 26px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; }
-    .hero-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; line-height: 1.5; }
-    .form-group { text-align: left; margin-bottom: 16px; }
-    .form-group label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+    /* Welcome Screen */
+    .welcome-card { max-width: 540px; margin: 30px auto; text-align: center; }
+    .hero-title { font-size: 28px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px; }
+    .hero-sub { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; }
+    .form-group { text-align: left; margin-bottom: 18px; }
+    .form-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px; color: #334155; }
     .form-control {
       width: 100%;
-      padding: 12px 14px;
+      padding: 12px 16px;
       border-radius: 10px;
       border: 1.5px solid var(--border);
-      font-size: 14px;
+      font-size: 15px;
       outline: none;
       transition: all 0.2s;
     }
     .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15); }
+
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 12px 20px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 14px;
       cursor: pointer;
       border: none;
-      transition: all 0.2s;
-      width: 100%;
+      transition: all 0.18s ease;
+      user-select: none;
     }
+    .btn:active { transform: scale(0.98); }
     .btn-primary { background: var(--primary); color: white; }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-primary:hover { background: var(--primary-dark); }
     .btn-accent { background: var(--accent); color: white; }
-    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-accent:hover { background: var(--accent-dark); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-danger:hover { background: #dc2626; }
+    .btn-hint { background: var(--amber-light); color: var(--amber); border: 1px solid #fde68a; }
+    .btn-hint:hover { background: #fde68a; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: #475569; }
     .btn-outline:hover { background: #f8fafc; }
+    .btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none !important; }
 
-    /* Top Game Status */
-    .game-status-bar {
+    /* Game Top Bar */
+    .game-top-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
       flex-wrap: wrap;
       gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
     }
-    .progress-pill {
+    .badge-group { display: flex; gap: 10px; align-items: center; }
+    .badge {
       font-size: 13px;
       font-weight: 700;
-      color: var(--primary-dark);
-      background: var(--primary-light);
       padding: 6px 14px;
       border-radius: 20px;
     }
-    .timer-pill {
-      font-size: 14px;
-      font-weight: 800;
-      color: #991b1b;
-      background: #fef2f2;
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid #fecaca;
-    }
+    .badge-progress { background: var(--primary-light); color: var(--primary-dark); }
+    .badge-score { background: #e0f2fe; color: #0369a1; }
+    .badge-timer { background: var(--danger-light); color: #991b1b; border: 1px solid #fecaca; }
 
     /* Clue Box */
-    .clue-box {
+    .clue-card {
       background: #f8fafc;
-      border-left: 4px solid var(--primary);
-      padding: 16px;
-      border-radius: 0 10px 10px 0;
+      border-left: 5px solid var(--primary);
+      border-radius: 4px 12px 12px 4px;
+      padding: 16px 20px;
       margin-bottom: 24px;
     }
-    .clue-ipa {
+    .clue-ipa-row {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--accent);
-      background: #f0f9ff;
-      padding: 4px 10px;
+      gap: 10px;
+      background: #f0fdf4;
+      padding: 4px 12px;
       border-radius: 6px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
+      border: 1px solid #bbf7d0;
     }
-    .clue-text-en { font-size: 15px; font-weight: 600; color: #0f172a; margin-bottom: 6px; line-height: 1.45; }
-    .clue-text-vi { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
+    .ipa-text { font-size: 15px; font-weight: 800; color: var(--primary-dark); letter-spacing: 0.5px; }
+    .btn-audio {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--accent);
+      padding: 2px 4px;
+    }
+    .clue-en { font-size: 16px; font-weight: 600; color: #0f172a; margin-bottom: 6px; line-height: 1.45; }
+    .clue-vi { font-size: 14px; color: var(--text-muted); line-height: 1.45; }
 
-    /* Molecular Scramble Drag-Drop Area */
-    .scramble-container { margin: 24px 0; text-align: center; }
-    .target-slots {
+    /* Molecular Scramble Board */
+    .scramble-area { margin: 26px 0; text-align: center; }
+    .slots-container {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
-      min-height: 56px;
+      min-height: 60px;
       margin-bottom: 20px;
-      padding: 10px;
+      padding: 12px;
       background: #f8fafc;
       border-radius: 12px;
       border: 2px dashed #cbd5e1;
     }
-    .char-tile {
-      width: 44px;
-      height: 48px;
+    .char-box {
+      width: 46px;
+      height: 50px;
       background: white;
-      border: 2px solid #059669;
-      border-radius: 8px;
+      border: 2px solid var(--primary);
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 800;
       color: var(--primary-dark);
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.06);
+      box-shadow: 0 4px 8px -2px rgba(5, 150, 105, 0.2);
       cursor: pointer;
       user-select: none;
-      transition: all 0.15s ease;
+      transition: transform 0.15s ease;
     }
-    .char-tile:hover { transform: scale(1.05); }
-    .char-tile.space {
+    .char-box:hover { transform: translateY(-2px); }
+    .char-box.space {
       background: transparent;
       border: none;
       box-shadow: none;
-      width: 20px;
+      width: 24px;
       cursor: default;
     }
-    .char-tile.empty {
+    .char-box.empty {
       background: #edf2f7;
-      border: 2px dashed #cbd5e1;
+      border: 2px dashed #94a3b8;
       color: transparent;
     }
 
-    .letters-pool {
+    .pool-container {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
       justify-content: center;
-      min-height: 52px;
-      padding: 10px;
+      min-height: 54px;
+      padding: 8px;
     }
     .pool-tile {
-      width: 44px;
-      height: 48px;
-      background: #0284c7;
+      width: 46px;
+      height: 50px;
+      background: var(--accent);
       color: white;
-      border-radius: 8px;
+      border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 800;
-      box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.3);
+      box-shadow: 0 4px 8px -2px rgba(2, 132, 199, 0.3);
       cursor: pointer;
       user-select: none;
-      transition: transform 0.15s;
+      transition: all 0.15s ease;
     }
-    .pool-tile:hover { transform: translateY(-2px); background: #0369a1; }
+    .pool-tile:hover { transform: translateY(-2px); background: var(--accent-dark); }
     .pool-tile.used { opacity: 0.2; pointer-events: none; transform: scale(0.9); }
 
-    /* Action Controls */
-    .controls-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1.5fr;
-      gap: 10px;
-      margin-top: 15px;
+    /* Result Feedback Banner */
+    .feedback-banner {
+      padding: 14px 20px;
+      border-radius: 10px;
+      margin: 16px 0;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 15px;
+      font-weight: 700;
+      animation: fadeIn 0.25s ease;
     }
-    .btn-hint { background: #fef3c7; color: #b45309; }
-    .btn-hint:hover { background: #fde68a; }
+    .feedback-banner.correct {
+      display: flex;
+      background: #ecfdf5;
+      color: #065f46;
+      border: 1.5px solid #a7f3d0;
+    }
+    .feedback-banner.incorrect {
+      display: flex;
+      background: #fef2f2;
+      color: #991b1b;
+      border: 1.5px solid #fecaca;
+    }
 
-    /* Results */
-    .result-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
-    .result-table th, .result-table td { padding: 10px 12px; border: 1px solid var(--border); text-align: left; }
-    .result-table th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
+    /* Actions Grid */
+    .action-bar {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+    .action-bar .btn { flex: 1; min-width: 130px; }
 
+    /* Report Table */
+    .report-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 13px; }
+    .report-table th, .report-table td { padding: 12px 14px; border: 1px solid var(--border); text-align: left; }
+    .report-table th { background: #f8fafc; font-weight: 700; color: var(--primary-dark); }
+
+    /* Responsive */
     @media (max-width: 640px) {
-      .controls-grid { grid-template-columns: 1fr; }
-      .char-tile, .pool-tile { width: 38px; height: 42px; font-size: 16px; }
+      header { padding: 12px 16px; }
+      .teacher-badge img { width: 60px; height: 60px; }
+      .teacher-info h1 { font-size: 16px; }
+      .teacher-info p { font-size: 11px; }
+      .char-box, .pool-tile { width: 38px; height: 44px; font-size: 17px; }
+      .action-bar .btn { flex: 1 1 calc(50% - 5px); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Top Header with Teacher Brand -->
+  <!-- Header with Large Avatar & View Counter starting at 95 -->
   <header>
     <div class="teacher-badge">
-      <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=100&q=80'">
+      <img src="teacher.jpg" alt="Th.s Nguyễn Thị Xuân Thương" onerror="this.src='https://images.unsplash.com/photo-1544717305-2782549b5136?w=200&q=80'">
       <div class="teacher-info">
         <h1>Th.s Nguyễn Thị Xuân Thương</h1>
         <p>Trường THPT Chu Văn An - Thái Nguyên</p>
@@ -273,100 +331,121 @@
     </div>
     <div class="view-counter">
       <span>👁️ Lượt xem:</span>
-      <span id="pageViews">1,248</span>
+      <span id="pageViewsDisplay">--</span>
     </div>
   </header>
 
   <main>
-    <!-- SCREEN 1: WELCOME -->
+    <!-- SCREEN 1: WELCOME SCREEN -->
     <section id="screen-welcome" class="screen active">
       <div class="card welcome-card">
         <h2 class="hero-title">MẬT MÃ PHÂN TỬ</h2>
-        <p class="hero-sub">Molecule Code - Unit 2: Di truyền học Sinh học 12<br>Giải mã 10 thuật ngữ di truyền học bị xáo trộn trong 4 phút!</p>
+        <p class="hero-sub">Molecule Code - Sinh học 12 (Unit 2: Di truyền học)<br>Sắp xếp đúng 10 thuật ngữ di truyền phân tử bị xáo trộn.<br>Tổng thời gian làm bài tối đa: <strong>4 phút</strong>.</p>
         
         <div class="form-group">
-          <label for="studentName">Họ và tên thí sinh:</label>
-          <input type="text" id="studentName" class="form-control" placeholder="Ví dụ: Nguyễn Văn A (bỏ trống tự sinh mã)">
+          <label for="studentName">Họ và tên học sinh:</label>
+          <input type="text" id="studentName" class="form-control" placeholder="Nhập họ và tên (hoặc để trống để sinh mã tự động)">
         </div>
 
         <div class="form-group">
-          <label for="studentClass">Lớp:</label>
-          <input type="text" id="studentClass" class="form-control" placeholder="Ví dụ: 12A1, 12A2...">
+          <label for="studentClass">Lớp học:</label>
+          <input type="text" id="studentClass" class="form-control" placeholder="Ví dụ: 12A1, 12A2, 12 Chuyên Sinh...">
         </div>
 
-        <button class="btn btn-primary" onclick="startGame()">🚀 BẮT ĐẦU GIẢI MÃ</button>
+        <button class="btn btn-primary" style="width: 100%; padding: 14px;" onclick="startGame()">
+          🚀 BẮT ĐẦU GIẢI MÃ
+        </button>
       </div>
     </section>
 
-    <!-- SCREEN 2: GAME ARENA -->
+    <!-- SCREEN 2: GAMEPLAY ARENA -->
     <section id="screen-game" class="screen">
       <div class="card">
-        <div class="game-status-bar">
-          <span class="progress-pill" id="questionProgress">Câu: 1 / 10</span>
-          <span class="progress-pill" style="background:#e0f2fe; color:#0369a1;" id="scoreDisplay">Điểm: 0</span>
-          <span class="timer-pill" id="timerBadge">⏱️ Thời gian: 04:00</span>
-        </div>
-
-        <div class="clue-box">
-          <div class="clue-ipa">
-            <span>🔊 IPA:</span>
-            <span id="clueIpa">/dʒiːn/</span>
-            <button style="border:none; background:none; cursor:pointer;" onclick="playAudioHint()">📢</button>
+        <!-- Top bar with metrics & early submit button -->
+        <div class="game-top-bar">
+          <div class="badge-group">
+            <span class="badge badge-progress" id="progressText">Câu: 1 / 10</span>
+            <span class="badge badge-score" id="scoreBadge">Điểm: 0</span>
+            <span class="badge badge-timer" id="timerBadge">⏱️ 04:00</span>
           </div>
-          <div class="clue-text-en" id="clueEn">Định nghĩa tiếng Anh...</div>
-          <div class="clue-text-vi" id="clueVi">Định nghĩa tiếng Việt...</div>
+          <button class="btn btn-danger" style="padding: 8px 16px; font-size: 13px;" onclick="confirmEarlySubmit()">
+            📤 NỘP BÀI SỚM
+          </button>
         </div>
 
-        <div class="scramble-container">
-          <!-- Target Answer Slots -->
-          <div class="target-slots" id="targetSlots"></div>
-          <!-- Scrambled Pool of Letters -->
-          <div class="letters-pool" id="lettersPool"></div>
+        <!-- Clue / Definition card -->
+        <div class="clue-card">
+          <div class="clue-ipa-row">
+            <span>🔊 IPA:</span>
+            <span class="ipa-text" id="clueIpa">/dʒiːn/</span>
+            <button class="btn-audio" title="Nghe phát âm chuẩn" onclick="speakCurrentWord()">📢</button>
+          </div>
+          <div class="clue-en" id="clueDefEn">A segment of a DNA molecule...</div>
+          <div class="clue-vi" id="clueDefVi">Một đoạn của phân tử DNA...</div>
         </div>
 
-        <div class="controls-grid">
-          <button class="btn btn-outline" onclick="resetCurrentWord()">🔄 Làm lại</button>
-          <button class="btn btn-hint" onclick="giveHint()">💡 Gợi ý (-10đ)</button>
-          <button class="btn btn-primary" onclick="verifyWord()">✅ XÁC NHẬN</button>
+        <!-- Scramble Interaction Board -->
+        <div class="scramble-area">
+          <div class="slots-container" id="targetSlots"></div>
+          <div class="pool-container" id="lettersPool"></div>
+        </div>
+
+        <!-- Feedback Notification Banner -->
+        <div id="feedbackBanner" class="feedback-banner">
+          <span id="feedbackText">--</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-bar">
+          <button class="btn btn-outline" id="btnResetWord" onclick="resetWordSlots()">🔄 Làm lại</button>
+          <button class="btn btn-hint" id="btnHint" onclick="giveHintLetter()">💡 Gợi ý (-10đ)</button>
+          <button class="btn btn-primary" id="btnConfirm" onclick="verifyWord()">✅ XÁC NHẬN</button>
+          <button class="btn btn-accent" id="btnNextWord" onclick="nextQuestion()" disabled>Tiếp theo ➡️</button>
         </div>
       </div>
     </section>
 
-    <!-- SCREEN 3: MISSION REPORT -->
-    <section id="screen-result" class="screen">
+    <!-- SCREEN 3: SUMMARY REPORT -->
+    <section id="screen-report" class="screen">
       <div class="card">
-        <h2 style="color:var(--primary-dark); font-size:22px; margin-bottom:8px;">BÁO CÁO KẾT QUẢ GIẢI MÃ</h2>
-        <p style="color:var(--text-muted); font-size:13px; margin-bottom:16px;">Hệ thống đã ghi nhận kết quả và đồng bộ về cơ sở dữ liệu học tập.</p>
+        <h2 style="font-size: 24px; font-weight: 800; color: var(--primary-dark); margin-bottom: 8px;">
+          BÁO CÁO KẾT QUẢ GIẢI MÃ PHÂN TỬ
+        </h2>
+        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 20px;">
+          Dữ liệu kết quả đã được gửi đồng bộ về cơ sở dữ liệu học tập của nhà trường.
+        </p>
 
-        <div style="background:var(--primary-light); padding:16px; border-radius:10px; margin-bottom:20px; display:flex; justify-content:space-around;">
-          <div><strong>Thí sinh:</strong> <span id="resName">--</span></div>
-          <div><strong>Lớp:</strong> <span id="resClass">--</span></div>
-          <div><strong>Tổng điểm:</strong> <span id="resScore" style="color:var(--primary-dark); font-weight:800;">--</span>/100</div>
-          <div><strong>Thời gian:</strong> <span id="resTime">--</span></div>
+        <div style="background: var(--primary-light); padding: 18px; border-radius: 12px; margin-bottom: 24px; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
+          <div><span style="font-size: 12px; color: var(--text-muted);">Thí sinh:</span><br><strong id="repName">--</strong></div>
+          <div><span style="font-size: 12px; color: var(--text-muted);">Lớp:</span><br><strong id="repClass">--</strong></div>
+          <div><span style="font-size: 12px; color: var(--text-muted);">Tổng điểm:</span><br><strong id="repScore" style="color: var(--primary-dark); font-size: 18px;">--</strong> / 100</div>
+          <div><span style="font-size: 12px; color: var(--text-muted);">Thời gian hoàn thành:</span><br><strong id="repTime">--</strong></div>
         </div>
 
-        <table class="result-table">
+        <table class="report-table">
           <thead>
             <tr>
               <th>#</th>
               <th>Thuật ngữ</th>
               <th>Phiên âm IPA</th>
               <th>Ý nghĩa tiếng Việt</th>
-              <th>Kết quả</th>
+              <th>Trạng thái</th>
             </tr>
           </thead>
-          <tbody id="resultTableBody"></tbody>
+          <tbody id="reportTableBody"></tbody>
         </table>
 
-        <div style="display:flex; gap:12px;">
-          <button class="btn btn-primary" onclick="location.reload()">🔁 THỰC HIỆN LẠI</button>
-        </div>
+        <button class="btn btn-primary" style="margin-top: 15px;" onclick="location.reload()">
+          🔁 LÀM LẠI LƯỢT MỚI
+        </button>
       </div>
     </section>
   </main>
 
   <script>
-    // 1. VOCABULARY DATA TỪ EXCEL CỦA CÔ XUÂN THƯƠNG
+    /* ========================================================
+       1. BỘ DỮ LIỆU CHUẨN 10 THUẬT NGỮ EXCEL (UNIT 2 SH12)
+       ======================================================== */
     const VOCABULARY_DATA = [
       {
         id: 1,
@@ -450,102 +529,165 @@
       }
     ];
 
-    // CẤU HÌNH HỆ THỐNG
+    /* ========================================================
+       2. CẤU HÌNH HỆ THỐNG & BACKEND GOOGLE SHEETS
+       ======================================================== */
     const CONFIG = {
       totalTimeSeconds: 240, // 4 phút = 240 giây
-      googleSheetUrl: "https://script.google.com/macros/s/AKfycbxq6ZbkEvN1NpNm4GgMPac1CzNnWRy4FqvX1IAi2ZBM_VLEszCCPgrZADZwnrSdE3rPxg/exec"
+      googleSheetUrl: "https://script.google.com/macros/s/AKfycbxQtvwcm75SBZZwp8VFA7RPbfgra2qvY-yLdcvoTDa-7HAA_plOsAH53Dz5UmxqGGb3Kg/exec" 
     };
 
-    // TRẠNG THÁI GAME
+    /* ========================================================
+       3. BỘ TẠO ÂM THANH NỘI BỘ (WEB AUDIO API)
+       ======================================================== */
+    const AudioEngine = {
+      ctx: null,
+      init() {
+        if (!this.ctx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) this.ctx = new AudioContext();
+        }
+      },
+      playTone(freq, type, duration, startTime = 0) {
+        if (!this.ctx) this.init();
+        if (!this.ctx) return;
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, this.ctx.currentTime + startTime);
+        gain.gain.setValueAtTime(0.2, this.ctx.currentTime + startTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + startTime + duration);
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+        osc.start(this.ctx.currentTime + startTime);
+        osc.stop(this.ctx.currentTime + startTime + duration);
+      },
+      playSuccess() {
+        this.init();
+        // Hợp âm vui vẻ Major (C5 - E5 - G5)
+        this.playTone(523.25, 'sine', 0.15, 0);
+        this.playTone(659.25, 'sine', 0.15, 0.12);
+        this.playTone(783.99, 'sine', 0.35, 0.24);
+      },
+      playError() {
+        this.init();
+        // Âm cảnh báo thấp dần (Low buzz)
+        this.playTone(180, 'sawtooth', 0.15, 0);
+        this.playTone(140, 'sawtooth', 0.25, 0.12);
+      }
+    };
+
+    /* ========================================================
+       4. QUẢN LÝ LƯỢT XEM TỪ MỐC 95
+       ======================================================== */
+    function initializeViewsCounter() {
+      const STORAGE_KEY = "molecule_code_views_count";
+      let currentViews = localStorage.getItem(STORAGE_KEY);
+      
+      if (!currentViews || isNaN(currentViews) || parseInt(currentViews) < 95) {
+        currentViews = 95;
+      } else {
+        currentViews = parseInt(currentViews) + 1;
+      }
+      
+      localStorage.setItem(STORAGE_KEY, currentViews);
+      document.getElementById("pageViewsDisplay").innerText = Number(currentViews).toLocaleString("vi-VN");
+    }
+    initializeViewsCounter();
+
+    /* ========================================================
+       5. QUẢN LÝ TRẠNG THÁI TRÒ CHƠI
+       ======================================================== */
     let student = { name: "", className: "" };
     let currentIndex = 0;
     let score = 0;
     let timerInterval = null;
     let timeLeft = CONFIG.totalTimeSeconds;
-    let targetSlotsData = []; // Mảng chứa chữ cái học sinh đã ghép
-    let poolLettersData = []; // Mảng chứa các ký tự trong khay gợi ý
+    let targetSlotsData = [];
+    let poolLettersData = [];
     let userResults = [];
+    let isCurrentWordVerified = false;
 
-    // TĂNG VÀ LƯU LƯỢT XEM
-    function handleViews() {
-      let views = parseInt(localStorage.getItem('mol_code_views') || '1248') + 1;
-      localStorage.setItem('mol_code_views', views);
-      document.getElementById('pageViews').innerText = views.toLocaleString();
-    }
-    handleViews();
-
-    // CHUYỂN MÀN HÌNH
     function showScreen(screenId) {
-      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-      document.getElementById(screenId).classList.add('active');
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById(screenId).classList.add("active");
     }
 
-    // BẮT ĐẦU CHƠI
     function startGame() {
-      let nameInput = document.getElementById('studentName').value.trim();
-      let classInput = document.getElementById('studentClass').value.trim();
+      AudioEngine.init();
+      const nameInput = document.getElementById("studentName").value.trim();
+      const classInput = document.getElementById("studentClass").value.trim();
 
-      student.name = nameInput || "BioHacker_" + Math.floor(1000 + Math.random() * 9000);
-      student.className = classInput || "12 Sinh";
+      student.name = nameInput || "BioStudent_" + Math.floor(1000 + Math.random() * 9000);
+      student.className = classInput || "12 THPT Chu Văn An";
 
       currentIndex = 0;
       score = 0;
       timeLeft = CONFIG.totalTimeSeconds;
       userResults = [];
 
-      showScreen('screen-game');
+      showScreen("screen-game");
       startTimer();
-      loadWord(currentIndex);
+      loadQuestion(currentIndex);
     }
 
-    // BỘ ĐẾM THỜI GIAN 4 PHÚT
     function startTimer() {
       clearInterval(timerInterval);
       timerInterval = setInterval(() => {
         timeLeft--;
-        let mins = Math.floor(timeLeft / 60);
-        let secs = timeLeft % 60;
-        document.getElementById('timerBadge').innerText = 
-          `⏱️ Thời gian: ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        const mins = Math.floor(timeLeft / 60);
+        const secs = timeLeft % 60;
+        document.getElementById("timerBadge").innerText = 
+          `⏱️ ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
 
         if (timeLeft <= 0) {
           clearInterval(timerInterval);
-          finishGame();
+          alert("⏱️ Đã hết 4 phút làm bài!");
+          finalizeGame();
         }
       }, 1000);
     }
 
-    // XÁO TRỘN KÝ TỰ
-    function shuffleArray(array) {
-      let arr = [...array];
-      for (let i = arr.length - 1; i > 0; i--) {
+    function shuffle(arr) {
+      let array = [...arr];
+      for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
+        [array[i], array[j]] = [array[j], array[i]];
       }
-      return arr;
+      return array;
     }
 
-    // LOAD THUẬT NGỮ THEO INDEX
-    function loadWord(index) {
+    function loadQuestion(index) {
       if (index >= VOCABULARY_DATA.length) {
-        finishGame();
+        finalizeGame();
         return;
       }
 
+      isCurrentWordVerified = false;
       const item = VOCABULARY_DATA[index];
-      document.getElementById('questionProgress').innerText = `Câu: ${index + 1} / ${VOCABULARY_DATA.length}`;
-      document.getElementById('scoreDisplay').innerText = `Điểm: ${score}`;
-      document.getElementById('clueIpa').innerText = item.ipa;
-      document.getElementById('clueEn').innerText = item.defEn;
-      document.getElementById('clueVi').innerText = item.defVi;
 
-      // Chuẩn bị dữ liệu ký tự
-      const rawWord = item.word;
+      // Cập nhật giao diện thanh trạng thái
+      document.getElementById("progressText").innerText = `Câu: ${index + 1} / ${VOCABULARY_DATA.length}`;
+      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
+      document.getElementById("clueIpa").innerText = item.ipa;
+      document.getElementById("clueDefEn").innerText = item.defEn;
+      document.getElementById("clueDefVi").innerText = item.defVi;
+
+      // Ẩn bảng thông báo kết quả & khóa nút Next
+      const banner = document.getElementById("feedbackBanner");
+      banner.style.display = "none";
+      banner.className = "feedback-banner";
+      document.getElementById("btnNextWord").disabled = true;
+      document.getElementById("btnConfirm").disabled = false;
+      document.getElementById("btnResetWord").disabled = false;
+      document.getElementById("btnHint").disabled = false;
+
+      // Xây dựng khay target slots và khay chữ cái xáo trộn
       targetSlotsData = [];
-
       let lettersOnly = [];
-      for (let i = 0; i < rawWord.length; i++) {
-        let ch = rawWord[i];
+
+      for (let i = 0; i < item.word.length; i++) {
+        let ch = item.word[i];
         if (ch === " ") {
           targetSlotsData.push({ original: " ", current: " ", isSpace: true });
         } else {
@@ -554,55 +696,53 @@
         }
       }
 
-      // Xáo trộn khay ký tự
-      let shuffled = shuffleArray(lettersOnly);
-      poolLettersData = shuffled.map((item, idx) => ({ ...item, poolId: idx, used: false }));
+      let shuffled = shuffle(lettersOnly);
+      poolLettersData = shuffled.map((letter, idx) => ({ ...letter, poolId: idx, used: false }));
 
       renderSlots();
       renderPool();
     }
 
-    // RENDER KHAY ĐÁP ÁN
     function renderSlots() {
-      const container = document.getElementById('targetSlots');
+      const container = document.getElementById("targetSlots");
       container.innerHTML = "";
 
       targetSlotsData.forEach((slot, idx) => {
-        const tile = document.createElement('div');
+        const box = document.createElement("div");
         if (slot.isSpace) {
-          tile.className = "char-tile space";
-          tile.innerText = "-";
+          box.className = "char-box space";
+          box.innerText = "-";
         } else if (slot.current === null) {
-          tile.className = "char-tile empty";
-          tile.innerText = "";
+          box.className = "char-box empty";
+          box.innerText = "";
         } else {
-          tile.className = "char-tile";
-          tile.innerText = slot.current;
-          // Click vào ký tự đã ghép để trả ngược lại khay
-          tile.onclick = () => removeTileFromSlot(idx);
+          box.className = "char-box";
+          box.innerText = slot.current;
+          if (!isCurrentWordVerified) {
+            box.onclick = () => removeTileFromSlot(idx);
+          }
         }
-        container.appendChild(tile);
+        container.appendChild(box);
       });
     }
 
-    // RENDER KHAY CHỮ CÁI BỊ XÁO TRỘN
     function renderPool() {
-      const pool = document.getElementById('lettersPool');
+      const pool = document.getElementById("lettersPool");
       pool.innerHTML = "";
 
       poolLettersData.forEach((letter) => {
-        const btn = document.createElement('div');
-        btn.className = `pool-tile ${letter.used ? 'used' : ''}`;
-        btn.innerText = letter.char;
-        if (!letter.used) {
-          btn.onclick = () => addTileToFirstEmptySlot(letter.poolId);
+        const tile = document.createElement("div");
+        tile.className = `pool-tile ${letter.used ? 'used' : ''}`;
+        tile.innerText = letter.char;
+        if (!letter.used && !isCurrentWordVerified) {
+          tile.onclick = () => addTileToEmptySlot(letter.poolId);
         }
-        pool.appendChild(btn);
+        pool.appendChild(tile);
       });
     }
 
-    // CHẠM CHỮ CÁI Ở DƯỚI ĐỂ ĐẨY LÊN Ô TRỐNG ĐẦU TIÊN
-    function addTileToFirstEmptySlot(poolId) {
+    function addTileToEmptySlot(poolId) {
+      if (isCurrentWordVerified) return;
       const poolItem = poolLettersData.find(p => p.poolId === poolId);
       if (!poolItem || poolItem.used) return;
 
@@ -616,8 +756,8 @@
       }
     }
 
-    // TRẢ LẠI KÝ TỰ VỀ KHAY
     function removeTileFromSlot(slotIdx) {
+      if (isCurrentWordVerified) return;
       const slot = targetSlotsData[slotIdx];
       if (slot.isSpace || slot.current === null) return;
 
@@ -630,31 +770,28 @@
       renderPool();
     }
 
-    // XÓA LÀM LẠI CÂU HIỆN TẠI
-    function resetCurrentWord() {
-      loadWord(currentIndex);
+    function resetWordSlots() {
+      if (isCurrentWordVerified) return;
+      loadQuestion(currentIndex);
     }
 
-    // NÚT GỢI Ý 💡
-    function giveHint() {
+    function giveHintLetter() {
+      if (isCurrentWordVerified) return;
       if (score >= 10) score -= 10;
-      document.getElementById('scoreDisplay').innerText = `Điểm: ${score}`;
+      document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
 
-      // Tìm vị trí sai hoặc chưa điền đầu tiên
       for (let i = 0; i < targetSlotsData.length; i++) {
         let slot = targetSlotsData[i];
         if (!slot.isSpace && slot.current !== slot.original) {
-          // Trả slot cũ về pool nếu có
           if (slot.current !== null) {
-            let oldPool = poolLettersData.find(p => p.poolId === slot.poolIdx);
-            if (oldPool) oldPool.used = false;
+            let oldP = poolLettersData.find(p => p.poolId === slot.poolIdx);
+            if (oldP) oldP.used = false;
           }
-          // Tìm ký tự đúng từ pool chưa dùng
-          let matchingPool = poolLettersData.find(p => !p.used && p.char.toLowerCase() === slot.original.toLowerCase());
-          if (matchingPool) {
+          let match = poolLettersData.find(p => !p.used && p.char.toLowerCase() === slot.original.toLowerCase());
+          if (match) {
             slot.current = slot.original;
-            slot.poolIdx = matchingPool.poolId;
-            matchingPool.used = true;
+            slot.poolIdx = match.poolId;
+            match.used = true;
           }
           break;
         }
@@ -663,88 +800,33 @@
       renderPool();
     }
 
-    // KIỂM TRA ĐÁP ÁN
+    /* ========================================================
+       6. XÁC NHẬN ĐÁP ÁN: ÂM THANH & HIỆN TRẠNG THÁI NGAY
+       ======================================================== */
     function verifyWord() {
-      const currentObj = VOCABULARY_DATA[currentIndex];
-      const userWord = targetSlotsData.map(s => s.current || "").join("");
+      const currentItem = VOCABULARY_DATA[currentIndex];
+      const submittedWord = targetSlotsData.map(s => s.current || "").join("");
+      const banner = document.getElementById("feedbackBanner");
+      const textSpan = document.getElementById("feedbackText");
 
-      // Kiểm tra không phân biệt hoa thường
-      if (userWord.toLowerCase() === currentObj.word.toLowerCase()) {
+      // Kiểm tra chuỗi khớp không phân biệt hoa thường
+      const isCorrect = (submittedWord.trim().toLowerCase() === currentItem.word.toLowerCase());
+
+      if (isCorrect) {
+        // Phát âm thanh đúng
+        AudioEngine.playSuccess();
+
+        // Cộng 10 điểm
         score += 10;
-        userResults.push({
-          word: currentObj.word,
-          ipa: currentObj.ipa,
-          meaning: currentObj.defVi,
-          isCorrect: true
-        });
-        alert("🎉 Chính xác! Bạn đã giải mã thành công phân tử này.");
-        currentIndex++;
-        loadWord(currentIndex);
-      } else {
-        alert("❌ Chưa đúng rồi! Hãy kiểm tra lại thứ tự các ký tự nhé.");
-      }
-    }
+        document.getElementById("scoreBadge").innerText = `Điểm: ${score}`;
 
-    // HOÀN THÀNH GAME & GỬI GOOGLE SHEETS
-    function finishGame() {
-      clearInterval(timerInterval);
-      showScreen('screen-result');
+        // Hiển thị banner chính xác
+        banner.className = "feedback-banner correct";
+        textSpan.innerHTML = `🎉 <strong>CHÍNH XÁC!</strong> Bạn đã giải mã thành công phân tử <u>${currentItem.word}</u>. Bấm "Tiếp theo ➡️" để tiếp tục.`;
 
-      const timeSpent = CONFIG.totalTimeSeconds - timeLeft;
-      const spentMin = Math.floor(timeSpent / 60);
-      const spentSec = timeSpent % 60;
-      const formattedTime = `${spentMin}m ${spentSec}s`;
-
-      document.getElementById('resName').innerText = student.name;
-      document.getElementById('resClass').innerText = student.className;
-      document.getElementById('resScore').innerText = score;
-      document.getElementById('resTime').innerText = formattedTime;
-
-      // Render bảng kết quả chi tiết
-      const tbody = document.getElementById('resultTableBody');
-      tbody.innerHTML = "";
-      VOCABULARY_DATA.forEach((item, idx) => {
-        const res = userResults[idx] || { isCorrect: false };
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${idx + 1}</td>
-          <td><strong>${item.word}</strong></td>
-          <td><code>${item.ipa}</code></td>
-          <td>${item.defVi}</td>
-          <td style="color:${res.isCorrect ? 'var(--primary)' : 'var(--danger)'}; font-weight:700;">
-            ${res.isCorrect ? '✅ Hoàn thành' : '❌ Chưa đạt'}
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-
-      // Tự động POST kết quả về Google Apps Script
-      sendDataToGoogleSheet({
-        timestamp: new Date().toLocaleString("vi-VN"),
-        name: student.name,
-        className: student.className,
-        score: score,
-        timeSpent: formattedTime
-      });
-    }
-
-    function sendDataToGoogleSheet(payload) {
-      if (!CONFIG.googleSheetUrl || CONFIG.googleSheetUrl.includes("YOUR_SCRIPT_ID")) return;
-      fetch(CONFIG.googleSheetUrl, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      }).catch(err => console.log("Gửi điểm ngầm hoàn tất"));
-    }
-
-    function playAudioHint() {
-      const currentObj = VOCABULARY_DATA[currentIndex];
-      // Sử dụng SpeechSynthesis của trình duyệt để đọc từ nếu chưa có file MP3 tĩnh
-      let utterance = new SpeechSynthesisUtterance(currentObj.word);
-      utterance.lang = 'en-US';
-      window.speechSynthesis.speak(utterance);
-    }
-  </script>
-</body>
-</html>
+        // Khóa chỉnh sửa câu hiện tại, mở nút tiếp theo
+        isCurrentWordVerified = true;
+        document.getElementById("btnConfirm").disabled = true;
+        document.getElementById("btnResetWord").disabled = true;
+        document.getElementById("btnHint").disabled = true;
+        document.getElementById("btnNextWord
